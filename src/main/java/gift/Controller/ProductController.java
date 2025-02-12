@@ -18,6 +18,14 @@ public class ProductController {
         return new ArrayList<>(products.values());
     }
 
+    // 2. 상품 추가
+    @PostMapping
+    public Product addProduct(@RequestBody Product product) {
+        product.setId(nextId++);
+        products.put(product.getId(), product);
+        return product;
+    }
+
 
 
 
