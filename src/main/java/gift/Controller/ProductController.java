@@ -33,10 +33,18 @@ public class ProductController {
         if(product == null) {
             throw new NoSuchElementException("해당 ID의 상품을 찾을 수 없습니다: " + id);
         }
-
         return product;
     }
 
-
+    // 4. 상품 삭제 기능
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {
+        Product product = products.get(id);
+        if(product == null) {
+            throw new NoSuchElementException("해당 ID의 상품을 찾을 수 없습니다: " + id);
+        }
+        products.remove(id);
+        return "상품이 삭제됨";
+    }
 
 }
