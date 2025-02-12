@@ -26,6 +26,16 @@ public class ProductController {
         return product;
     }
 
+    // 3. 특정 ID의 상품 조회
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable("id") Long id) {
+        Product product = products.get(id);
+        if(product == null) {
+            throw new NoSuchElementException("해당 ID의 상품을 찾을 수 없습니다: " + id);
+        }
+
+        return product;
+    }
 
 
 
