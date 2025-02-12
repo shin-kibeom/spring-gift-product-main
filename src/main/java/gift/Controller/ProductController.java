@@ -47,4 +47,22 @@ public class ProductController {
         return "상품이 삭제됨";
     }
 
+    // 5. 상품 수정 기능
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product updatedProduct) {
+        Product existingProduct = products.get(id);
+        if (existingProduct == null) {
+            throw new NoSuchElementException("해당 ID의 상품을 찾을 수 없습니다: " + id);
+        }
+        if (updatedProduct.getName() != null && !updatedProduct.getName().isEmpty()) {
+            existingProduct.setName(updatedProduct.getName());
+        }
+        if (updatedProduct.getPrice() > 0) {
+            existingProduct.setPrice(updatedProduct.getPrice());
+        }
+        if (updatedProduct.getImageUrl() != null && !updatedProduct.getImageUrl().isEmpty()) {
+            existingProduct.setImageUrl(updatedProduct.getImageUrl());
+        }
+        return existingProduct;
+    }
 }
